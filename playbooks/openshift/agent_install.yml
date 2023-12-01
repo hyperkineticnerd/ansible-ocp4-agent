@@ -1,0 +1,29 @@
+---
+- name: Agent-based Installer
+  hosts: localhost
+  become: true
+  gather_facts: false
+  # module_defaults:
+  #   kubernetes.core.k8s:
+  #     kubeconfig: $HOME/.kube/config
+  tasks:
+    - name: Generate agent-config.yaml
+      ansible.builtin.template:
+        src: cluster/agent-config.yaml.j2
+        dest: "{{ openshift_cluster_install_dir }}/agent-config.yaml"
+        mode: '0644'
+
+    - name: Generate install-config.yaml
+      ansible.builtin.template:
+        src: cluster/install-config.yaml.j2
+        dest: "{{ openshift_cluster_install_dir }}/install-config.yaml"
+        mode: '0644'
+
+    - name: Generate ISO
+      register: generate_iso
+      changed_when:
+        - generate_iso.rc == 0
+      ansible.builtin.command: |
+        openshift-install agent create image \
+        --log-level debug \
+        --dir {{ openshift_cluster_install_dir }}

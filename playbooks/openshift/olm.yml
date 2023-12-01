@@ -1,0 +1,36 @@
+---
+- name: Configure OLM
+  hosts: localhost
+  become: true
+  # module_defaults:
+  #   kubernetes.core.k8s:
+  #     kubeconfig: $HOME/.kube/config
+  gather_facts: false
+  tasks:
+    - name: Disable default sources
+      kubernetes.core.k8s:
+        state: patched
+        api_version: v1
+        kind: OperatorHub
+        name: cluster
+        definition:
+          spec:
+            disableAllDefaultSources: "true"
+
+    # - name: Enable redhat operator index catalogsource
+    #   kubernetes.core.k8s:
+
+    # - name: Enable certified operator index catalogsource
+    #   kubernetes.core.k8s:
+
+    # - name: Enable community operator index catalogsource
+    #   kubernetes.core.k8s:
+
+    # - name: Delete redhat-operator-index pod
+    #   kubernetes.core.k8s:
+
+    # - name: Delete certified-operator-index pod
+    #   kubernetes.core.k8s:
+
+    # - name: Delete community-operator-index pod
+    #   kubernetes.core.k8s:

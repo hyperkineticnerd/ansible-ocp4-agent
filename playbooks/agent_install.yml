@@ -1,8 +1,0 @@
----
-- name: Agent-based Installer
-  hosts: localhost
-  become: true
-  # module_defaults:
-  #   kubernetes.core.k8s:
-  #     kubeconfig: $HOME/.kube/config
-  tasks:

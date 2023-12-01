@@ -1,17 +1,17 @@
 ---
 - name: Install clients
-  ansible.builtin.import_playbook: clients.yml
+  ansible.builtin.import_playbook: openshift/clients.yml
 - name: Install cluster
-  ansible.builtin.import_playbook: agent_install.yml
+  ansible.builtin.import_playbook: openshift/agent_install.yml
 - name: Configure OLM
-  ansible.builtin.import_playbook: olm.yml
+  ansible.builtin.import_playbook: openshift/olm.yml
 - name: Install NMState Operator
-  ansible.builtin.import_playbook: operator_nmstate.yml
+  ansible.builtin.import_playbook: openshift/operator_nmstate.yml
 - name: Install node networks
-  ansible.builtin.import_playbook: networks_node.yml
+  ansible.builtin.import_playbook: openshift/networks_node.yml
 - name: Install pod networks
-  ansible.builtin.import_playbook: networks_pod.yml
+  ansible.builtin.import_playbook: openshift/networks_pod.yml
 - name: Install Trident CSI
-  ansible.builtin.import_playbook: storage_trident.yml
+  ansible.builtin.import_playbook: openshift/storage_trident.yml
 - name: Install Keycloak
-  ansible.builtin.import_playbook: operator_keycloak.yml
+  ansible.builtin.import_playbook: openshift/operator_keycloak.yml

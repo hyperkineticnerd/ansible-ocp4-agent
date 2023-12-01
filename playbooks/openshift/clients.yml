@@ -31,7 +31,7 @@
         remote_src: true
         exclude:
           - README.md
-        dest: /usr/local/sbin
+        dest: "{{ openshift_client_bin }}"
 
     - name: Install oc-mirror
       ansible.builtin.unarchive:
@@ -39,11 +39,11 @@
         remote_src: true
         exclude:
           - README.md
-        dest: /usr/local/sbin
+        dest: "{{ openshift_client_bin }}"
 
     - name: Fix permissions on oc-mirror
       ansible.builtin.file:
-        path: /usr/local/sbin/oc-mirror
+        path: "{{ openshift_client_bin }}/oc-mirror"
         owner: root
         group: root
         mode: '0755'
@@ -54,4 +54,4 @@
         remote_src: true
         exclude:
           - README.md
-        dest: /usr/local/sbin
+        dest: "{{ openshift_client_bin }}"

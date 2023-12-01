@@ -1,0 +1,27 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  labels:
+    app: sso
+  name: keycloak
+  namespace: keycloak
+spec:
+  additionalOptions:
+  - name: KC_PROXY
+    value: edge
+  db:
+    database: keycloak
+    host: postgresql.container.hkn.lab
+    passwordSecret:
+      key: POSTGRES_PASSWORD
+      name: keycloak-db-secret
+    usernameSecret:
+      key: POSTGRES_USERNAME
+      name: keycloak-db-secret
+    vendor: postgres
+  hostname:
+    hostname: keycloak.hknrd.io
+  http:
+    httpEnabled: true
+    tlsSecret: keycloak-tls
+  instances: 1

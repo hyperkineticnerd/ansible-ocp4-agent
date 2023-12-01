@@ -1,0 +1,26 @@
+---
+- name: Install Operator
+  hosts: localhost
+  become: true
+  # module_defaults:
+  #   kubernetes.core.k8s:
+  #     kubeconfig: $HOME/.kube/config
+  tasks:
+    - name: Create namespace
+      kubernetes.core.k8s:
+        state: present
+        api_version: v1
+        kind: Namespace
+        name: "{{ operator_name }}"
+
+    - name: Create operatorgroup
+      kubernetes.core.k8s:
+        state: present
+        template: 'operators/operatorgroup.yml.j2'
+
+    - name: Create subscription
+      vars:
+        operator_name:
+      kubernetes.core.k8s:
+        state: present
+        template: 'operators/subscription.yml.j2'

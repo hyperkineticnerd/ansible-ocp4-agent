@@ -1,0 +1,57 @@
+---
+- name: Download client utilities
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Download oc
+      ansible.builtin.get_url:
+        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/openshift-client-linux-{{ openshift_version }}.tar.gz
+        dest: /tmp/
+        mode: '0644'
+        decompress: false
+      register: download_oc
+
+    - name: Download oc-mirror
+      ansible.builtin.get_url:
+        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/oc-mirror.tar.gz
+        dest: /tmp/
+        mode: '0644'
+      register: download_mirror
+
+    - name: Download openshift-installer
+      ansible.builtin.get_url:
+        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/openshift-install-linux-{{ openshift_version }}.tar.gz
+        dest: /tmp/
+        mode: '0644'
+      register: download_installer
+
+    - name: Install oc
+      ansible.builtin.unarchive:
+        src: "{{ download_oc.dest }}"
+        remote_src: true
+        exclude:
+          - README.md
+        dest: /usr/local/sbin
+
+    - name: Install oc-mirror
+      ansible.builtin.unarchive:
+        src: "{{ download_mirror.dest }}"
+        remote_src: true
+        exclude:
+          - README.md
+        dest: /usr/local/sbin
+
+    - name: Fix permissions on oc-mirror
+      ansible.builtin.file:
+        path: /usr/local/sbin/oc-mirror
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Install openshift-installer
+      ansible.builtin.unarchive:
+        src: "{{ download_installer.dest }}"
+        remote_src: true
+        exclude:
+          - README.md
+        dest: /usr/local/sbin

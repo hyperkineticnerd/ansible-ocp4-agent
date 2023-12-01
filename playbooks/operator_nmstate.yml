@@ -1,0 +1,19 @@
+---
+- name: Install Operator
+  ansible.builtin.import_playbook: operator_base.yml
+  vars:
+    operator_name: "{{ nmstate_operator }}"
+    operator_namespace: openshift-nmstate
+    operator_channel: "{{ nmstate_channel }}"
+    operator_source: "{{ nmstate_source }}"
+
+- name: Configure NMState Operator
+  hosts: localhost
+  become: true
+  # module_defaults:
+  #   kubernetes.core.k8s:
+  #     kubeconfig: $HOME/.kube/config
+  tasks:
+    - name: Configure NMState
+      kubernetes.core.k8s:
+        state: present

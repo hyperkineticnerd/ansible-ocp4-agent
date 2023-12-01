@@ -1,0 +1,5 @@
+---
+keycloak_operator: rhbk-operator
+keycloak_namespace: keycloak
+keycloak_channel: stable-v22
+keycloak_source: cs-redhat-operator-index

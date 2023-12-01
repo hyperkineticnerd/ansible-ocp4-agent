@@ -1,0 +1,46 @@
+---
+- name: NetApp Trident CSI
+  hosts: localhost
+  become: true
+  # module_defaults:
+  #   kubernetes.core.k8s:
+  #     kubeconfig: $HOME/.kube/config
+  tasks:
+    - name: Download trident
+      ansible.builtin.get_url:
+        url: https://github.com/NetApp/trident/releases/download/v{{ trident_version }}/trident-installer-{{ trident_version }}.tar.gz
+        dest: /tmp/trident-installer-{{ trident_version }}.tar.gz
+        owner: root
+        mode: '0644'
+
+    - name: Install tridentctl
+      ansible.builtin.unarchive:
+        src: /tmp/trident-installer-{{ trident_version }}.tar.gz
+        remote_src: true
+        include:
+          - tridentctl
+        dest: /usr/local/sbin
+
+    - name: Deploy trident
+      ansible.builtin.command: tridentctl install \
+        --namespace {{ trident_namespace }} \
+        --image-registry {{ trident_registry }} \
+        --autosupport-image {{ trident_autosupport }} \
+        --trident-image {{ trident_image }}
+      register: trident_deploy
+      changed_when: "trident_deploy.rc != 0"
+
+    - name: Patch Trident controller
+      when:
+        - trident_controller_annotations is defined
+        - trident_controller_annotations.keys() | length > 0
+      kubernetes.core.k8s:
+        state: patched
+        kind: Deployment
+        name: trident-controller
+        definition:
+          spec:
+            template:
+              metadata:
+                annotations:
+                  "{{ trident_controller_annotations }}"

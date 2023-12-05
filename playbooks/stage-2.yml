@@ -1,8 +1,4 @@
 ---
-- name: Install clients
-  ansible.builtin.import_playbook: openshift/clients.yml
-- name: Install cluster
-  ansible.builtin.import_playbook: openshift/agent_install.yml
 - name: Configure OLM
   ansible.builtin.import_playbook: openshift/olm.yml
 - name: Install NMState Operator

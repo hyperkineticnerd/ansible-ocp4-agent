@@ -7,21 +7,20 @@ metadata:
   namespace: keycloak
 spec:
   additionalOptions:
-  - name: KC_PROXY
-    value: edge
+    - name: KC_PROXY
+      value: edge
   db:
     database: keycloak
-    host: postgresql.container.hkn.lab
+    host: postgresql.keycloak.svc
     passwordSecret:
-      key: POSTGRES_PASSWORD
+      key: POSTGRESQL_PASSWORD
       name: keycloak-db-secret
     usernameSecret:
-      key: POSTGRES_USERNAME
+      key: POSTGRESQL_USERNAME
       name: keycloak-db-secret
     vendor: postgres
   hostname:
-    hostname: keycloak.hknrd.io
+    hostname: keycloak.apps.{{ cluster_name }}.{{ cluster_domain }}
   http:
     httpEnabled: true
-    tlsSecret: keycloak-tls
   instances: 1

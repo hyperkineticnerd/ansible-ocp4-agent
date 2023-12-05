@@ -1,4 +1,4 @@
 ---
 openshift_version: "4.13.23"
 openshift_client_bin: /usr/local/bin
-openshift_cluster_install_dir: ~/ocp/install/cluster/
+openshift_cluster_install_dir: ../../temp # ~/ocp/install/cluster/

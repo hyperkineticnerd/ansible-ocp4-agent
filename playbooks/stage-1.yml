@@ -1,0 +1,3 @@
+---
+- name: Install cluster
+  ansible.builtin.import_playbook: openshift/agent_install.yml

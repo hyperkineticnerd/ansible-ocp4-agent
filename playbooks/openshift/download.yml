@@ -1,0 +1,34 @@
+---
+- name: Download client utilities
+  hosts: localhost
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Download oc
+      ansible.builtin.get_url:
+        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/openshift-client-linux-{{ openshift_version }}.tar.gz
+        dest: /tmp/
+        mode: '0644'
+        decompress: false
+      register: download_oc
+
+    - name: Download oc-mirror
+      ansible.builtin.get_url:
+        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/oc-mirror.tar.gz
+        dest: /tmp/
+        mode: '0644'
+      register: download_mirror
+
+    - name: Download openshift-installer
+      ansible.builtin.get_url:
+        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/openshift-install-linux-{{ openshift_version }}.tar.gz
+        dest: /tmp/
+        mode: '0644'
+      register: download_installer
+
+    - name: Download trident
+      ansible.builtin.get_url:
+        url: https://github.com/NetApp/trident/releases/download/v{{ trident_version }}/trident-installer-{{ trident_version }}.tar.gz
+        dest: /tmp/
+        owner: root
+        mode: '0644'

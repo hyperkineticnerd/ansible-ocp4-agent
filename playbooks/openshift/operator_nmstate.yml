@@ -10,6 +10,7 @@
 - name: Configure NMState Operator
   hosts: localhost
   become: true
+  gather_facts: false
   # module_defaults:
   #   kubernetes.core.k8s:
   #     kubeconfig: $HOME/.kube/config

@@ -1,0 +1,5 @@
+---
+- name: Download clients
+  ansible.builtin.import_playbook: openshift/download.yml
+- name: Install clients
+  ansible.builtin.import_playbook: openshift/clients.yml

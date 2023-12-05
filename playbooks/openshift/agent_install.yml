@@ -7,6 +7,12 @@
   #   kubernetes.core.k8s:
   #     kubeconfig: $HOME/.kube/config
   tasks:
+    - name: Create cluster install dir
+      ansible.builtin.file:
+        path: "{{ openshift_cluster_install_dir }}"
+        mode: '0755'
+        state: directory
+
     - name: Generate agent-config.yaml
       ansible.builtin.template:
         src: cluster/agent-config.yaml.j2
@@ -24,6 +30,7 @@
       changed_when:
         - generate_iso.rc == 0
       ansible.builtin.command: |
-        openshift-install agent create image \
+        {{ openshift_client_bin }}/openshift-install \
+        agent create image \
         --log-level debug \
         --dir {{ openshift_cluster_install_dir }}

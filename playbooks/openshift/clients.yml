@@ -6,7 +6,7 @@
   tasks:
     - name: Install oc
       ansible.builtin.unarchive:
-        src: /tmp/openshift-client-linux-{{ openshift_version }}.tar.gz
+        src: "{{ openshift_download_dir }}/openshift-client-linux-{{ openshift_version }}.tar.gz"
         remote_src: true
         exclude:
           - README.md
@@ -14,7 +14,7 @@
 
     - name: Install oc-mirror
       ansible.builtin.unarchive:
-        src: /tmp/oc-mirror.tar.gz
+        src: "{{ openshift_download_dir }}/oc-mirror.tar.gz"
         remote_src: true
         exclude:
           - README.md
@@ -30,7 +30,7 @@
 
     - name: Install openshift-installer
       ansible.builtin.unarchive:
-        src: /tmp/openshift-install-linux-{{ openshift_version }}.tar.gz
+        src: "{{ openshift_download_dir }}/openshift-install-linux-{{ openshift_version }}.tar.gz"
         remote_src: true
         exclude:
           - README.md
@@ -38,8 +38,20 @@
 
     - name: Install tridentctl
       ansible.builtin.unarchive:
-        src: /tmp/trident-installer-{{ trident_version }}.tar.gz
+        src: "{{ openshift_download_dir }}/trident-installer-{{ trident_version }}.tar.gz"
         remote_src: true
         include:
           - trident-installer/tridentctl
         dest: "{{ openshift_client_bin }}"
+
+    - name: Move tridentctl
+      ansible.builtin.copy:
+        remote_src: true
+        src: "{{ openshift_client_bin }}/trident-installer/tridentctl"
+        dest: "{{ openshift_client_bin }}/tridentctl"
+        mode: '0755'
+
+    - name: Remove trident-installer/tridentctl
+      ansible.builtin.file:
+        path: "{{ openshift_client_bin }}/trident-installer/tridentctl"
+        state: absent

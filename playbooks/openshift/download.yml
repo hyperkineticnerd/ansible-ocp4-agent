@@ -6,29 +6,28 @@
   tasks:
     - name: Download oc
       ansible.builtin.get_url:
-        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/openshift-client-linux-{{ openshift_version }}.tar.gz
-        dest: /tmp/
+        url: "{{ openshift_download_base_url }}/openshift-client-{{ openshift_bastion_platform }}-{{ openshift_version }}.tar.gz"
+        dest: "{{ openshift_download_dir }}"
         mode: '0644'
-        decompress: false
       register: download_oc
 
     - name: Download oc-mirror
       ansible.builtin.get_url:
-        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/oc-mirror.tar.gz
-        dest: /tmp/
+        url: "{{ openshift_download_base_url }}/oc-mirror.tar.gz"
+        dest: "{{ openshift_download_dir }}"
         mode: '0644'
       register: download_mirror
 
     - name: Download openshift-installer
       ansible.builtin.get_url:
-        url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}/openshift-install-linux-{{ openshift_version }}.tar.gz
-        dest: /tmp/
+        url: "{{ openshift_download_base_url }}/openshift-install-{{ openshift_bastion_platform }}-{{ openshift_version }}.tar.gz"
+        dest: "{{ openshift_download_dir }}"
         mode: '0644'
       register: download_installer
 
     - name: Download trident
       ansible.builtin.get_url:
         url: https://github.com/NetApp/trident/releases/download/v{{ trident_version }}/trident-installer-{{ trident_version }}.tar.gz
-        dest: /tmp/
+        dest: "{{ openshift_download_dir }}"
         owner: root
         mode: '0644'

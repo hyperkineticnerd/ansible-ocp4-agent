@@ -17,6 +17,6 @@ networking:
   - 172.30.0.0/16
 platform:
   none: {} 
-fips: false 
-pullSecret: '{"auths": ...}' 
-sshKey: 'ssh-ed25519 AAAA...' 
+fips: {{ cluster_fips_flag }} 
+pullSecret: {{ cluster_pull_secret | quote }}
+sshKey: {{ cluster_ssh_key | quote }}

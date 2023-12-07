@@ -44,7 +44,7 @@
           - trident-installer/tridentctl
         dest: "{{ openshift_client_bin }}"
 
-    - name: Move tridentctl
+    - name: Move tridentctl to proper location
       ansible.builtin.copy:
         remote_src: true
         src: "{{ openshift_client_bin }}/trident-installer/tridentctl"

@@ -1,0 +1,13 @@
+apiVersion: nmstate.io/v1beta1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: management
+spec:
+  nodeSelector:
+    node-role.kubernetes.io/master: ''
+  desiredState:
+    interfaces:
+      - name: ens2
+        description: management network on ens2
+        type: ethernet
+        state: up

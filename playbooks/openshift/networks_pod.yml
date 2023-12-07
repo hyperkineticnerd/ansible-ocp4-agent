@@ -7,12 +7,7 @@
   #   kubernetes.core.k8s:
   #     kubeconfig: $HOME/.kube/config
   tasks:
-    - name: Create NetworkAttachmentDefinitions
+    - name: Create management pod network for Trident
       kubernetes.core.k8s:
-        definition:
-          api_version: network.kubernetes.io
-          kind: NetworkAttachmentDefinitions
-          metadata:
-            name:
-            namespace:
-          spec: {}
+        state: present
+        template: network/pod/mgmt.yaml.j2

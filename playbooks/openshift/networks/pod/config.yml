@@ -1,0 +1,13 @@
+---
+- name: Configure pod networks
+  hosts: localhost
+  become: true
+  gather_facts: false
+  # module_defaults:
+  #   kubernetes.core.k8s:
+  #     kubeconfig: $HOME/.kube/config
+  tasks:
+    - name: Create management pod network for Trident
+      kubernetes.core.k8s:
+        state: present
+        template: pod/mgmt.yaml.j2

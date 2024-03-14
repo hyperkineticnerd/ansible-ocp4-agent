@@ -1,0 +1,19 @@
+---
+- name: Configure node networks
+  hosts: localhost
+  become: true
+  gather_facts: false
+  # module_defaults:
+  #   kubernetes.core.k8s:
+  #     kubeconfig: $HOME/.kube/config
+  tasks:
+    - name: Configure base interfaces
+      kubernetes.core.k8s:
+        state: present
+        template: bond.yaml.j2
+
+    - name: Configure Node IPs
+      kubernetes.core.k8s:
+        state: present
+        template: "{{ item }}.yaml.j2"
+      loop: "{{ cluster_node_list }}"

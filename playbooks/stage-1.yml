@@ -1,3 +1,5 @@
 ---
 - name: Install cluster
-  ansible.builtin.import_playbook: openshift/agent_install.yml
+  ansible.builtin.import_playbook: openshift/install/agent.yml
+# - name: Bootstrap via iDRAC
+#   ansible.builtin.import_playbook: openshift/idrac/boot.yml

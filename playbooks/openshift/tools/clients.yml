@@ -1,0 +1,29 @@
+---
+- name: Install client utilities
+  hosts: localhost
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Install oc
+      ansible.builtin.unarchive:
+        src: "{{ openshift_download_dir }}/openshift-client-linux-{{ openshift_version }}.tar.gz"
+        remote_src: true
+        exclude:
+          - README.md
+        dest: "{{ openshift_client_bin }}"
+
+    - name: Install oc-mirror
+      ansible.builtin.unarchive:
+        src: "{{ openshift_download_dir }}/oc-mirror.tar.gz"
+        remote_src: true
+        exclude:
+          - README.md
+        dest: "{{ openshift_client_bin }}"
+
+    - name: Fix permissions on oc-mirror
+      ansible.builtin.file:
+        path: "{{ openshift_client_bin }}/oc-mirror"
+        owner: root
+        group: root
+        mode: '0755'
+      failed_when: false

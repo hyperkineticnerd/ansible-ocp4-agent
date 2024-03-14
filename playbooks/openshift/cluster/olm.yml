@@ -10,18 +10,18 @@
     - name: Disable default sources
       kubernetes.core.k8s:
         state: patched
-        api_version: operators.coreos.io/v1
+        api_version: config.openshift.io/v1
         kind: OperatorHub
         name: cluster
         definition:
           spec:
-            disableAllDefaultSources: "true"
+            disableAllDefaultSources: true
 
     - name: Enable redhat operator index catalogsource
       kubernetes.core.k8s:
         state: present
         definition:
-          apiVersion: operators.coreos.io/v1alpha1
+          apiVersion: operators.coreos.com/v1alpha1
           kind: CatalogSource
           metadata:
             name: cs-redhat-operator-index
@@ -34,7 +34,7 @@
       kubernetes.core.k8s:
         state: present
         definition:
-          apiVersion: operators.coreos.io/v1alpha1
+          apiVersion: operators.coreos.com/v1alpha1
           kind: CatalogSource
           metadata:
             name: cs-certified-operator-index
@@ -47,7 +47,7 @@
     #   kubernetes.core.k8s:
     #     state: present
     #     definition:
-    #       apiVersion: operators.coreos.io/v1alpha1
+    #       apiVersion: operators.coreos.com/v1alpha1
     #       kind: CatalogSource
     #       metadata:
     #         name: cs-community-operator-index

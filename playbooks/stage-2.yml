@@ -13,5 +13,5 @@
   ansible.builtin.import_playbook: openshift/storage/trident/install.yml
 - name: Configure Trident Backend
   ansible.builtin.import_playbook: openshift/storage/trident/backend.yml
-- name: COnfigure OCP StorageClass
+- name: Configure OCP StorageClass
   ansible.builtin.import_playbook: openshift/storage/trident/storageclass.yml

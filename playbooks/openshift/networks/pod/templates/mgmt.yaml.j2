@@ -1,15 +1,15 @@
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: management
+  name: mgmt-vlan
   namespace: trident-system
 spec:
-  config: '
+  config: |-
     {
       "cniVersion": "0.3.1",
       "name": "mgmt-vlan",
       "type": "ipvlan",
-      "master": "bond0.670"
+      "master": "bond0.670",
       "linkInContainer": false,
       "mode": "l2",
       "ipam": {
@@ -20,4 +20,4 @@ spec:
           }
         ]
       }
-    }'
+    }

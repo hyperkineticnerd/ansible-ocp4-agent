@@ -6,7 +6,7 @@
   tasks:
     - name: Download oc
       ansible.builtin.get_url:
-        url: "{{ openshift_download_base_url }}/openshift-client-{{ openshift_bastion_platform }}-{{ openshift_version }}.tar.gz"
+        url: "{{ openshift_download_base_url }}/openshift-client-{{ openshift_bastion_platform }}-{{ openshift_release }}.tar.gz"
         dest: "{{ openshift_download_dir }}"
         mode: '0644'
       register: download_oc
@@ -27,7 +27,7 @@
 
     - name: Download openshift-installer
       ansible.builtin.get_url:
-        url: "{{ openshift_download_base_url }}/openshift-install-{{ openshift_bastion_platform }}-{{ openshift_version }}.tar.gz"
+        url: "{{ openshift_download_base_url }}/openshift-install-{{ openshift_bastion_platform }}-{{ openshift_release }}.tar.gz"
         dest: "{{ openshift_download_dir }}"
         mode: '0644'
       register: download_installer

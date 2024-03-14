@@ -6,7 +6,7 @@
   tasks:
     - name: Install openshift-installer
       ansible.builtin.unarchive:
-        src: "{{ openshift_download_dir }}/openshift-install-linux-{{ openshift_version }}.tar.gz"
+        src: "{{ openshift_download_dir }}/openshift-install-linux-{{ openshift_release }}.tar.gz"
         remote_src: true
         exclude:
           - README.md

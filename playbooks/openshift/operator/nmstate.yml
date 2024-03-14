@@ -6,6 +6,7 @@
     operator_namespace: openshift-nmstate
     operator_channel: "{{ nmstate_channel }}"
     operator_source: "{{ nmstate_source }}"
+    operator_create_group: true
 
 - name: Configure NMState Operator
   hosts: localhost
@@ -18,3 +19,9 @@
     - name: Configure NMState
       kubernetes.core.k8s:
         state: present
+        definition:
+          apiVersion: nmstate.io/v1
+          kind: NMState
+          metadata:
+            name: nmstate
+          spec: {}

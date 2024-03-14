@@ -6,6 +6,7 @@
     operator_namespace: keycloak
     operator_channel: "{{ keycloak_channel }}"
     operator_source: "{{ keycloak_source }}"
+    operator_create_group: true
 
 - name: Configure Keycloak Operator
   hosts: localhost
@@ -15,6 +16,14 @@
   #   kubernetes.core.k8s:
   #     kubeconfig: $HOME/.kube/config
   tasks:
+    - name: Create postgresql database secrets
+      kubernetes.core.k8s:
+        state: present
+
+    - name: Create postgresql persistent volume claim
+      kubernetes.core.k8s:
+        state: present
+
     - name: Create postgresql deployment
       kubernetes.core.k8s:
         state: present

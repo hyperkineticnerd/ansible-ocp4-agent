@@ -6,22 +6,24 @@
   # module_defaults:
   #   kubernetes.core.k8s:
   #     kubeconfig: $HOME/.kube/config
+  vars:
+    operator_create_group: true
   tasks:
-    - name: Create namespace
+    - name: Create namespace for {{ operator_name }}
       kubernetes.core.k8s:
         state: present
         api_version: v1
         kind: Namespace
-        name: "{{ operator_name }}"
+        name: "{{ operator_namespace }}"
 
-    - name: Create operatorgroup
+    - name: Create operatorgroup for {{ operator_name }}
+      when:
+        - operator_create_group
       kubernetes.core.k8s:
         state: present
         template: 'operators/operatorgroup.yml.j2'
 
-    - name: Create subscription
-      vars:
-        operator_name:
+    - name: Create subscription for {{ operator_name }}
       kubernetes.core.k8s:
         state: present
         template: 'operators/subscription.yml.j2'

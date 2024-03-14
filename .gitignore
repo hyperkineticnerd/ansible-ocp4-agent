@@ -1,2 +1,11 @@
+# Visual Studio Code
 .vscode
-temp
+
+# Ansible Generated Files
+temp/
+
+# Inventories
+inventories/**
+
+# Ansible Vaults
+vault.yml

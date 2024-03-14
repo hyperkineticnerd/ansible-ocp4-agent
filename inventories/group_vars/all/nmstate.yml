@@ -1,5 +1,0 @@
----
-nmstate_operator: kubernetes-nmstate-operator
-nmstate_namespace: openshift-nmstate
-nmstate_channel: stable
-nmstate_source: cs-redhat-operator-index

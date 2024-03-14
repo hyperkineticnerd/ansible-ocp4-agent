@@ -1,7 +1,0 @@
----
-openshift_version: "4.13.23"
-openshift_client_bin: /usr/local/bin
-openshift_cluster_install_dir: ../../temp # ~/ocp/install/cluster/
-openshift_download_dir: /tmp
-openshift_bastion_platform: linux
-openshift_download_base_url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ openshift_version }}

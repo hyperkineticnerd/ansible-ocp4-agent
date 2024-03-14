@@ -5,7 +5,7 @@
   gather_facts: false
   # module_defaults:
   #   kubernetes.core.k8s:
-  #     kubeConfig: $HOME/.kube/config
+  #     kubeconfig: $HOME/.kube/config
   tasks:
     - name: Configure Scheduler
       kubernetes.core.k8s:

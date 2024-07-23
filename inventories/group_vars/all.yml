@@ -1,0 +1,21 @@
+openshift_dir: 
+openshift_cluster_install_dir: "{{ openshift_dir }}/install"
+openshift_client_bin: "{{ openshift_dir }}/bin"
+openshift_download_dir: "{{ openshift_dir }}/downloads"
+openshift_bastion_platform: x86_64
+openshift_download_base_url: https://mirror.openshift.com/pub/openshift-v4/{{ openshift_bastion_platform }}/clients
+openshift_release: 4.16.4
+trident_version: v24.06.0
+
+ca_cert_location: 
+ssh_key: 
+registry_fqdn: 
+registry_port:
+registry: "{{ registry_fqdn }}:{{ registry_port }}"
+content_dir: 
+cluster_name: 
+cluster_domain: 
+cluster_cidr: 
+cluster_fips: 
+
+pull_secret:

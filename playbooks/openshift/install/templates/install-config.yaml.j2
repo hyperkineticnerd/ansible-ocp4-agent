@@ -23,10 +23,15 @@ networking:
   - 172.30.0.0/16
 platform:
   none: {} 
-fips: {{ cluster_fips_flag }} 
-pullSecret: {{ cluster_pull_secret | quote }}
-sshKey: {{ cluster_ssh_key | quote }}
+fips: {{ cluster_fips | lower }} 
+pullSecret: '{{ pull_secret }}'
+sshKey: "{{ lookup('ansible.builtin.file', ssh_key) }}"
 additionalTrustBundle: |
-  {{ cluster_additional_bundle | index(width=2) }}
+{{ lookup('ansible.builtin.file',  ca_cert_location) | indent(2, true) }}
 imageDigestSources:
-  {{ cluster_imagecontentsources }}
+  - mirrors:
+    - {{ registry }}/openshift/release
+    source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+  - mirrors:
+    - {{ registry }}/openshift/release-images
+    source: quay.io/openshift-release-dev/ocp-release

@@ -1,7 +1,6 @@
 ---
 - name: Agent-based Installer
   hosts: localhost
-  become: true
   gather_facts: false
   # module_defaults:
   #   kubernetes.core.k8s:
@@ -18,6 +17,9 @@
         src: agent-config.yaml.j2
         dest: "{{ openshift_cluster_install_dir }}/agent-config.yaml"
         mode: '0644'
+      vars: 
+        rendezvousIP: "{{ hostvars['master-0'].IP }}"
+
 
     - name: Generate install-config.yaml
       ansible.builtin.template:

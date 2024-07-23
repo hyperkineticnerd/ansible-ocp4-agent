@@ -2,6 +2,4 @@ apiVersion: v1alpha1
 kind: AgentConfig
 metadata:
   name: {{ cluster_name }}
-rendezvousIP: {{ cluster_bootstrap_ip }}
-hosts: 
-{{ cluster_hosts | to_nice_yaml }}
+rendezvousIP: {{ rendezvousIP }}

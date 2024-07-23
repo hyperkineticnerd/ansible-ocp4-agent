@@ -5,7 +5,6 @@
 temp/
 
 # Inventories
-inventories/group_vars/**
 inventories/host_vars/**
 
 # Ansible Vaults
@@ -13,3 +12,7 @@ vault.yml
 
 # Ansible Network Backups
 backups/**
+
+# Ignore all *-orig files in any subdirectory
+**/*-orig
+

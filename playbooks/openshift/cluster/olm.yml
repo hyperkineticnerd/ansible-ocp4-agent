@@ -1,7 +1,6 @@
 ---
 - name: Configure OLM
   hosts: localhost
-  become: true
   # module_defaults:
   #   kubernetes.core.k8s:
   #     kubeconfig: $HOME/.kube/config

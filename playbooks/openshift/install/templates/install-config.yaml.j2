@@ -4,12 +4,12 @@ compute:
 - name: worker
   architecture: amd64
   hyperthreading: Enabled
-  replicas: 0 
+  replicas: {{ workers | length }}
 controlPlane: 
   name: master
   architecture: amd64
   hyperthreading: Enabled
-  replicas: 1 
+  replicas: {{ masters | length }}
 metadata:
   name: {{ cluster_name }} 
 networking:
@@ -23,7 +23,7 @@ networking:
   - 172.30.0.0/16
 platform:
   none: {} 
-fips: {{ cluster_fips | lower }} 
+fips: true
 pullSecret: '{{ pull_secret }}'
 sshKey: "{{ lookup('ansible.builtin.file', ssh_key) }}"
 additionalTrustBundle: |

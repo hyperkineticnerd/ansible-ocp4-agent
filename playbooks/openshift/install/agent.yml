@@ -1,7 +1,6 @@
 ---
 - name: Agent-based Installer
   hosts: localhost
-  gather_facts: false
   # module_defaults:
   #   kubernetes.core.k8s:
   #     kubeconfig: $HOME/.kube/config
@@ -14,18 +13,24 @@
 
     - name: Generate agent-config.yaml
       ansible.builtin.template:
-        src: agent-config.yaml.j2
-        dest: "{{ openshift_cluster_install_dir }}/agent-config.yaml"
+        src: "{{ item }}.j2"
+        dest: "{{ openshift_cluster_install_dir }}/{{ item }}"
         mode: '0644'
-      vars: 
-        rendezvousIP: "{{ hostvars['master-0'].IP }}"
+#      vars: 
+#        rendezvousIP: "{{ hostvars['master-0'].IP }}"
+      with_items:
+       - install-config.yaml
+       - agent-config.yaml
+      ## FIX needed to get vars into template
 
-
-    - name: Generate install-config.yaml
-      ansible.builtin.template:
-        src: install-config.yaml.j2
-        dest: "{{ openshift_cluster_install_dir }}/install-config.yaml"
-        mode: '0644'
+    - name: Create copys of agent-config and install configuration
+      ansible.builtin.copy:
+        src: "{{ openshift_cluster_install_dir }}/{{ item }}"
+        dest: "{{ openshift_cluster_install_dir }}/{{ item }}-copy"
+        remote_src: yes
+      with_items:
+       - install-config.yaml
+       - agent-config.yaml
 
     - name: Generate ISO
       register: generate_iso

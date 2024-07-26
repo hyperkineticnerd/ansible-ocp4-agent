@@ -1,59 +1,67 @@
 openshift_dir:
-openshift_cluster_install_dir: "{{ openshift_dir }}/install-{{ ansible_date_time.date }}"
-openshift_client_bin: "{{ openshift_dir }}/bin"
-openshift_download_dir: "{{ openshift_dir }}/downloads"
-openshift_bastion_platform: x86_64
-openshift_download_base_url: https://mirror.openshift.com/pub/openshift-v4/{{ openshift_bastion_platform }}/clients
-openshift_release: 4.14.33
-trident_version: v24.06.0
+openshift_bastion_platform:
+openshift_download_base_url:
+openshift_release:
+trident_version:
 
 ## Location of specific files
 ca_cert_location:
-ssh_key: 
+ssh_key:
 
 registry_fqdn:
-registry_port: 
-registry: "{{ registry_fqdn }}:{{ registry_port }}"
-cluster_name: 
+registry_port:
+registry:
+cluster_name:
 cluster_domain:
-cluster_fqdn: "{{ cluster_name }}.{{ cluster_domain }}"
-cluster_cidr: 
-pull_secret: 
+cluster_fqdn:
+pull_secret:
+pull_mirror:
 
 ## Routing
-dns_resolver: 
-next_hop_address:  
-next_hop_interface: 
-table_id: 
+ip_space:
+cluster_cidr:
+dns_resolver:
+next_hop_address:
+next_hop_interface:
+table_id:
+idrac_user:
+idrac_password:
 
-## Cluster Config
-masters:
-  - name: master-0
-    ip: 
+## Cluster Node Config
+nodes:
+  - name:
+    ip:
     mac:
-  - name: master-1
-    ip: 
-    mac: 
-  - name: master-2
-    ip: 
-    mac: 
-workers:
-  - name: worker-0
-    ip: 
+  - name:
+    ip:
+    mac:
+  - name:
+    ip:
+    mac:
+  - name:
+    ip:
     mac:
 idrac:
-  - name: master-0
-    ip: 
-    mac: 
-  - name: master-1
-    ip: 
-    mac: 
-  - name: master-2
-    ip: 
-    mac: 
-  - name: worker-0
+  - name:
     ip:
-    mac: 
+    mac:
+  - name:
+    ip:
+    mac:
+  - name:
+    ip:
+    mac:
+  - name:
+    ip:
+    mac:
 
 ## Operators
+
+operator_index:
+  - redhat-operator-index:
+    - name:
+    - name:
+  - redhat-marketplace-index:
+  - community-operator-index:
+  - certified-operator-index:
 

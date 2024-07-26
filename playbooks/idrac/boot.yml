@@ -1,36 +1,32 @@
 ---
 - name: Provision Server via iDRAC
   hosts: idrac
-  gather_facts: false
-
+  gather_facts: true
   vars:
     boot_source_mode: "UEFI"
-
-  # module_defaults:
-  #   dellemc.openmanage.idrac_virtual_media:
-  #   dellemc.openmanage.idrac_boot:
-
   tasks:
     - name: Insert image file using HTTP.
       delegate_to: localhost
       dellemc.openmanage.idrac_virtual_media:
-        idrac_ip: "{{ inventory_host }}"
+        idrac_ip: "{{ item.ip }}"
         idrac_user: "{{ idrac_user }}"
         idrac_password: "{{ idrac_password }}"
         validate_certs: false
         force: true
         virtual_media:
           - insert: true
-            image: "http://10.76.30.70/agent.x86_64.iso"
+            image: "http://{{ ansible_default_ipv4.address }}/agent.x86_64.iso"
             media_type: "DVD"
+      loop: "{{ idrac }}"
 
     - name: Boot Once via CD
       delegate_to: localhost
       dellemc.openmanage.idrac_boot:
-        idrac_ip: "{{ inventory_host }}"
+        idrac_ip: "{{ item.ip }}"
         idrac_user: "{{ idrac_user }}"
         idrac_password: "{{ idrac_password }}"
         validate_certs: false
         boot_source_override_target: cd
         boot_source_override_enabled: once
         reset_type: force_restart
+      loop: "{{ idrac }}"

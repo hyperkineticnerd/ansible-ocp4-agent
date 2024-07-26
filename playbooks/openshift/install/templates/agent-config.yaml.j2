@@ -2,53 +2,24 @@ apiVersion: v1alpha1
 kind: AgentConfig
 metadata:
   name: {{ cluster_name }}
-rendezvousIP: {{ masters[0].ip }}
+rendezvousIP: {{ nodes[0].ip }}
 hosts:
-{% for master in masters %}
-  - hostname: {{ master.name }}
-    role: master
+{% for node in nodes %}
+  - hostname: {{ node.name }}
+    role: {{ node.name | regex_replace('-.*', '') }}
     interfaces:
       - name: eno1
-        macAddress: {{ master.mac }}
+        macAddress: {{ node.mac }}
     networkConfig:
       interfaces:
         - name: eno1
           type: ethernet
           state: up
-          mac-address: {{ master.mac }}
+          mac-address: {{ node.mac }}
           ipv4:
             enabled: true
             address: 
-              - ip: {{ master.ip }}
-                prefix-length: 23
-            dhcp: false
-      dns-resolver:
-        config:
-          server:
-            - {{ dns_resolver }}
-      routes:
-        config:
-          - destination: 0.0.0.0/0
-            next-hop-address: {{ next_hop_address }}
-            next-hop-interface: {{ next_hop_interface }}
-            table-id: {{ table_id }}
-{% endfor %}
-{% for worker in workers %}
-  - hostname: {{ worker.name }}
-    role: worker
-    interfaces:
-      - name: eno1
-        macAddress: {{ worker.mac }}
-    networkConfig:
-      interfaces:
-        - name: eno1
-          type: ethernet
-          state: up
-          mac-address: {{ worker.mac }}
-          ipv4:
-            enabled: true
-            address: 
-              - ip: {{ worker.ip }}
+              - ip: {{ node.ip }}
                 prefix-length: 23
             dhcp: false
       dns-resolver:

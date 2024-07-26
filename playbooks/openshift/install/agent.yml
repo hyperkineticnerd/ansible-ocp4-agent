@@ -16,12 +16,9 @@
         src: "{{ item }}.j2"
         dest: "{{ openshift_cluster_install_dir }}/{{ item }}"
         mode: '0644'
-#      vars: 
-#        rendezvousIP: "{{ hostvars['master-0'].IP }}"
       with_items:
        - install-config.yaml
        - agent-config.yaml
-      ## FIX needed to get vars into template
 
     - name: Create copys of agent-config and install configuration
       ansible.builtin.copy:
@@ -41,3 +38,10 @@
         agent create image \
         --log-level debug \
         --dir {{ openshift_cluster_install_dir }}
+
+    - name: Move generated ISO to webroot
+      ansible.builtin.copy:
+        src: "{{ openshift_cluster_install_dir}}/agent.x86_64.iso"
+        dest: /var/www/html
+        remote_src: true
+      become: true

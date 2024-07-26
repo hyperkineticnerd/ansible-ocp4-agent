@@ -15,4 +15,5 @@ backups/**
 
 # Ignore all *-orig files in any subdirectory
 **/*-orig
+**/conf-*
 

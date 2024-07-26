@@ -4,12 +4,12 @@ compute:
 - name: worker
   architecture: amd64
   hyperthreading: Enabled
-  replicas: {{ workers | length }}
+  replicas: {{ nodes | selectattr('name', 'search', '^worker') | list | length }}
 controlPlane: 
   name: master
   architecture: amd64
   hyperthreading: Enabled
-  replicas: {{ masters | length }}
+  replicas: {{ nodes | selectattr('name', 'search', '^master') | list | length }}
 metadata:
   name: {{ cluster_name }} 
 networking:

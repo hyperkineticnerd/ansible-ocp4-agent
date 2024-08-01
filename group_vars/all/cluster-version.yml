@@ -1,44 +1,44 @@
-openshift_dir: "/home/matt/Downloads/ocp"
-openshift_release: 4.14.16
-previous_openshift_release: 4.14.12
-trident_version: v24.06.0
+openshift_dir:
+openshift_release:
+previous_openshift_release:
+trident_version:
 
 ## Location of specific files
-ca_cert_location: /etc/pki/ca-trust/source/anchors/Home+CA.pem
-ssh_key: /home/matt/test/test-key.pub
+ca_cert_location:
+ssh_key:
 
-registry: "{{ registry_fqdn }}{{ registry_port}}" ## TODO add logic to add : if not set to 443
-pull_secret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMmYwZGUyMzhiZTE2NGM3ZGIyNjMyZGRlOTdjMTYyYTE6NU9MSjZaM1hER1lXQzJNQzFJOFVGOTQ0Nko5TkxWQUtFVTRSM0wyWEk4RUE5TktDOUlKNUtKSkNWWkxTNFBIRw==","email":"mriensch@redhat.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMmYwZGUyMzhiZTE2NGM3ZGIyNjMyZGRlOTdjMTYyYTE6NU9MSjZaM1hER1lXQzJNQzFJOFVGOTQ0Nko5TkxWQUtFVTRSM0wyWEk4RUE5TktDOUlKNUtKSkNWWkxTNFBIRw==","email":"mriensch@redhat.com"},"registry.connect.redhat.com":{"auth":"fHVoYy0xZ2Jhb0I4TGJZc0N4emtDdUptWDA0bkNUb0s6ZXlKaGJHY2lPaUpTVXpVeE1pSjkuZXlKemRXSWlPaUk1WkRVellqTTNPRGs0TldNME1qWTJZV1ZqTVRaaFlUVmtOMll3WWpJM015SjkuaGVWajJIc2FoVXpYUFVDQmVkZ19SNk1rVGVocVlNY19NYXNBYVpNTGczdG9LeGJ4aS1jZUN2Z1RYV1l6SG1TZlpUVy0xb1ZXREFTR1pQRnIxeWVaOFl3QUhqTUU0a1phWVI5UkYzV0hfaDhpV2lvb3Y4cU9IdnNHd21aQ2pqUEtBZ3VXdGVYdEE2bGxtbkVMT2R2UVBrejhBb0lOOTh1ajZIXzJaTktfVjgtX3dVMDZIcjZKc1MzOWpmNDNYdkp2MDJHR3BXTFJjb3FxR3FMWW1CR0NZN0hNZ0xUOC1ZVjVjbzZpSVptWEllaWoxSUpRT2ktUUVXXzQ2UzBvd3d1NjA1Qm9WLUZBV2ZTbDRyTEk1RUF1YjN1eWhvYTJETGtQRkNKdXhpRkE5SWNMVEhPdUw2OGpPdDJxZzdqQmZfbHQwUnRreG4wNzczaVFMWHJuLXJnNzBPcGNDalB5RGhvU1h0ZThqVU9JeUszZlhZSDBJVm8xellLQUx5eURwemFyUkFuOHNsbEpKdXVEanZjb3J0UjVsNzhhcVlZc0gyTlRTN3BBa1JabkZDZDlSVGtjRURUUFhzWFR1QzBNOXJJbXdyQTYwdHB4TzdwRGJpZnFpTl93Y2p3ZEdZVGFmT3lQWjdjeklmM1ZKN3JXRFRIWm8tNDM2TV9PdGgwa3hxSENVXzJ4cS12bndvVVhscDY4U0Q4UzdMRTB3eHBkSEhfdENXTkYteGg5ZktyTmhwcDNHdTFZU01hNWtaanVXdVlfaTM2aVIySTBQd25uLXhrWFMwYVNYZHFkVFdpNHZ0MXYyOGRXeWNaS2RyOGVVd3NYQjhJMUJPUnJUUmtHNjIxVXRzZ0dEQmFYN1hSMF9ZYUhQLWdrNC1XVE1MYUhrYXdMN0V3TjVpc0oxeTQ=","email":"mriensch@redhat.com"},"registry.redhat.io":{"auth":"fHVoYy0xZ2Jhb0I4TGJZc0N4emtDdUptWDA0bkNUb0s6ZXlKaGJHY2lPaUpTVXpVeE1pSjkuZXlKemRXSWlPaUk1WkRVellqTTNPRGs0TldNME1qWTJZV1ZqTVRaaFlUVmtOMll3WWpJM015SjkuaGVWajJIc2FoVXpYUFVDQmVkZ19SNk1rVGVocVlNY19NYXNBYVpNTGczdG9LeGJ4aS1jZUN2Z1RYV1l6SG1TZlpUVy0xb1ZXREFTR1pQRnIxeWVaOFl3QUhqTUU0a1phWVI5UkYzV0hfaDhpV2lvb3Y4cU9IdnNHd21aQ2pqUEtBZ3VXdGVYdEE2bGxtbkVMT2R2UVBrejhBb0lOOTh1ajZIXzJaTktfVjgtX3dVMDZIcjZKc1MzOWpmNDNYdkp2MDJHR3BXTFJjb3FxR3FMWW1CR0NZN0hNZ0xUOC1ZVjVjbzZpSVptWEllaWoxSUpRT2ktUUVXXzQ2UzBvd3d1NjA1Qm9WLUZBV2ZTbDRyTEk1RUF1YjN1eWhvYTJETGtQRkNKdXhpRkE5SWNMVEhPdUw2OGpPdDJxZzdqQmZfbHQwUnRreG4wNzczaVFMWHJuLXJnNzBPcGNDalB5RGhvU1h0ZThqVU9JeUszZlhZSDBJVm8xellLQUx5eURwemFyUkFuOHNsbEpKdXVEanZjb3J0UjVsNzhhcVlZc0gyTlRTN3BBa1JabkZDZDlSVGtjRURUUFhzWFR1QzBNOXJJbXdyQTYwdHB4TzdwRGJpZnFpTl93Y2p3ZEdZVGFmT3lQWjdjeklmM1ZKN3JXRFRIWm8tNDM2TV9PdGgwa3hxSENVXzJ4cS12bndvVVhscDY4U0Q4UzdMRTB3eHBkSEhfdENXTkYteGg5ZktyTmhwcDNHdTFZU01hNWtaanVXdVlfaTM2aVIySTBQd25uLXhrWFMwYVNYZHFkVFdpNHZ0MXYyOGRXeWNaS2RyOGVVd3NYQjhJMUJPUnJUUmtHNjIxVXRzZ0dEQmFYN1hSMF9ZYUhQLWdrNC1XVE1MYUhrYXdMN0V3TjVpc0oxeTQ=","email":"mriensch@redhat.com"}}}'
-pull_mirror: true
+registry:
+pull_secret:
+pull_mirror:
 
 ## Operators To be mirrored, based on index they are in
 disconnected_operators:
   - redhat-operator-index:
-    - name: kubernetes-nmstate-operator
-    - name: kubevirt-hyperconverged
+    - name:
+    - name:
   - redhat-marketplace-index:
   - community-operator-index:
   - certified-operator-index:
 
 ## additionalImages for oc-mirror to pull. Include version
 additionalImages:
-  - name: registry.redhat.io/ubi8/ubi:latest
-  - name: registry.redhat.io/ubi9/ubi:latest
-  - name: quay.io/noseka1/toolbox-container:full
+  - name:
+  - name:
+  - name:
 
 install_operators:
-  - name: kubevirt-hyperconverged
-    namespace: openshift-cvn
-    source_index: openshift-marketplace
+  - name:
+    namespace:
+    source_index:
   - name:
     namespace:
     source_index:
 
 quay_images:
-- name: registry.redhat.io/rhel8/redis-6:1-110
-- name: registry.redhat.io/rhel8/postgresql-13:1-109
-- name: registry.redhat.io/quay/quay-rhel8:v3.11.0
-- name: registry.redhat.io/quay/quay-rhel8:v3.11.0
-- name: registry.redhat.io/rhel8/postgresql-13:1-109
-- name: registry.redhat.io/quay/clair-rhel8:v3.11.0
+- name:
+- name:
+- name:
+- name:
+- name:
+- name:
 

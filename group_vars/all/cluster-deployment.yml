@@ -1,79 +1,65 @@
-openshift_dir:
+openshift_dir: "/home/matt/Downloads/ocp"
 
 ## Location of specific files
-ca_cert_location:
-ssh_key:
+ca_cert_location: /etc/pki/ca-trust/source/anchors/Home+CA.pem
+ssh_key: /home/matt/test/test-key.pub
 
-registry_port:
-cluster_name:
-cluster_domain:
-pull_secret:
-pull_mirror:
+# Registry
+registry_volume: 
+registry_username:
+registry_password: 
+registry_port: 5000
+cluster_name: ocp-sno
+cluster_domain: home
+pull_secret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMmYwZGUyMzhiZTE2NGM3ZGIyNjMyZGRlOTdjMTYyYTE6NU9MSjZaM1hER1lXQzJNQzFJOFVGOTQ0Nko5TkxWQUtFVTRSM0wyWEk4RUE5TktDOUlKNUtKSkNWWkxTNFBIRw==","email":"mriensch@redhat.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfMmYwZGUyMzhiZTE2NGM3ZGIyNjMyZGRlOTdjMTYyYTE6NU9MSjZaM1hER1lXQzJNQzFJOFVGOTQ0Nko5TkxWQUtFVTRSM0wyWEk4RUE5TktDOUlKNUtKSkNWWkxTNFBIRw==","email":"mriensch@redhat.com"},"registry.connect.redhat.com":{"auth":"fHVoYy0xZ2Jhb0I4TGJZc0N4emtDdUptWDA0bkNUb0s6ZXlKaGJHY2lPaUpTVXpVeE1pSjkuZXlKemRXSWlPaUk1WkRVellqTTNPRGs0TldNME1qWTJZV1ZqTVRaaFlUVmtOMll3WWpJM015SjkuaGVWajJIc2FoVXpYUFVDQmVkZ19SNk1rVGVocVlNY19NYXNBYVpNTGczdG9LeGJ4aS1jZUN2Z1RYV1l6SG1TZlpUVy0xb1ZXREFTR1pQRnIxeWVaOFl3QUhqTUU0a1phWVI5UkYzV0hfaDhpV2lvb3Y4cU9IdnNHd21aQ2pqUEtBZ3VXdGVYdEE2bGxtbkVMT2R2UVBrejhBb0lOOTh1ajZIXzJaTktfVjgtX3dVMDZIcjZKc1MzOWpmNDNYdkp2MDJHR3BXTFJjb3FxR3FMWW1CR0NZN0hNZ0xUOC1ZVjVjbzZpSVptWEllaWoxSUpRT2ktUUVXXzQ2UzBvd3d1NjA1Qm9WLUZBV2ZTbDRyTEk1RUF1YjN1eWhvYTJETGtQRkNKdXhpRkE5SWNMVEhPdUw2OGpPdDJxZzdqQmZfbHQwUnRreG4wNzczaVFMWHJuLXJnNzBPcGNDalB5RGhvU1h0ZThqVU9JeUszZlhZSDBJVm8xellLQUx5eURwemFyUkFuOHNsbEpKdXVEanZjb3J0UjVsNzhhcVlZc0gyTlRTN3BBa1JabkZDZDlSVGtjRURUUFhzWFR1QzBNOXJJbXdyQTYwdHB4TzdwRGJpZnFpTl93Y2p3ZEdZVGFmT3lQWjdjeklmM1ZKN3JXRFRIWm8tNDM2TV9PdGgwa3hxSENVXzJ4cS12bndvVVhscDY4U0Q4UzdMRTB3eHBkSEhfdENXTkYteGg5ZktyTmhwcDNHdTFZU01hNWtaanVXdVlfaTM2aVIySTBQd25uLXhrWFMwYVNYZHFkVFdpNHZ0MXYyOGRXeWNaS2RyOGVVd3NYQjhJMUJPUnJUUmtHNjIxVXRzZ0dEQmFYN1hSMF9ZYUhQLWdrNC1XVE1MYUhrYXdMN0V3TjVpc0oxeTQ=","email":"mriensch@redhat.com"},"registry.redhat.io":{"auth":"fHVoYy0xZ2Jhb0I4TGJZc0N4emtDdUptWDA0bkNUb0s6ZXlKaGJHY2lPaUpTVXpVeE1pSjkuZXlKemRXSWlPaUk1WkRVellqTTNPRGs0TldNME1qWTJZV1ZqTVRaaFlUVmtOMll3WWpJM015SjkuaGVWajJIc2FoVXpYUFVDQmVkZ19SNk1rVGVocVlNY19NYXNBYVpNTGczdG9LeGJ4aS1jZUN2Z1RYV1l6SG1TZlpUVy0xb1ZXREFTR1pQRnIxeWVaOFl3QUhqTUU0a1phWVI5UkYzV0hfaDhpV2lvb3Y4cU9IdnNHd21aQ2pqUEtBZ3VXdGVYdEE2bGxtbkVMT2R2UVBrejhBb0lOOTh1ajZIXzJaTktfVjgtX3dVMDZIcjZKc1MzOWpmNDNYdkp2MDJHR3BXTFJjb3FxR3FMWW1CR0NZN0hNZ0xUOC1ZVjVjbzZpSVptWEllaWoxSUpRT2ktUUVXXzQ2UzBvd3d1NjA1Qm9WLUZBV2ZTbDRyTEk1RUF1YjN1eWhvYTJETGtQRkNKdXhpRkE5SWNMVEhPdUw2OGpPdDJxZzdqQmZfbHQwUnRreG4wNzczaVFMWHJuLXJnNzBPcGNDalB5RGhvU1h0ZThqVU9JeUszZlhZSDBJVm8xellLQUx5eURwemFyUkFuOHNsbEpKdXVEanZjb3J0UjVsNzhhcVlZc0gyTlRTN3BBa1JabkZDZDlSVGtjRURUUFhzWFR1QzBNOXJJbXdyQTYwdHB4TzdwRGJpZnFpTl93Y2p3ZEdZVGFmT3lQWjdjeklmM1ZKN3JXRFRIWm8tNDM2TV9PdGgwa3hxSENVXzJ4cS12bndvVVhscDY4U0Q4UzdMRTB3eHBkSEhfdENXTkYteGg5ZktyTmhwcDNHdTFZU01hNWtaanVXdVlfaTM2aVIySTBQd25uLXhrWFMwYVNYZHFkVFdpNHZ0MXYyOGRXeWNaS2RyOGVVd3NYQjhJMUJPUnJUUmtHNjIxVXRzZ0dEQmFYN1hSMF9ZYUhQLWdrNC1XVE1MYUhrYXdMN0V3TjVpc0oxeTQ=","email":"mriensch@redhat.com"}}}'
+pull_mirror: true
+registry_fqdn: hivemind.home
+registry_port: 443
 
 ## Routing
-ip_space:
-cluster_cidr:
-dns_resolver:
-gateway_ip:
-openshift_interface:
-api_ip:
-ingress_ip:
-table_id:
+ip_space: 192.168.0 ## TODO add some logic to validate/create based on facts see about dynamiclly calculated based on entry
+cluster_cidr: '{{ ip_space }}.0/16'
+dns_resolver: '{{ ip_space }}.51'
+gateway_ip: '{{ ip_space }}.1'
+openshift_interface: eno1
+api_ip: '{{ ip_space }}.50'
+ingress_ip: '{{ ip_space }}.51'
+table_id: 254
 idrac_user:
 idrac_password:
 
 ## Cluster Node Config
 nodes:
-  - name:
-    ip:
-    mac:
-  - name:
-    ip:
-    mac:
-  - name:
-    ip:
-    mac:
-  - name:
-    ip:
-    mac:
+  - name: master-0
+    ip: '17'
+    mac: be:47:95:d0:01:51
+  - name: master-1
+    ip: '18'
+    mac: be:47:95:d0:01:52
+  - name: master-2
+    ip: '19'
+    mac: be:47:95:d0:01:53
+  - name: worker-0
+    ip: '20'
+    mac: be:47:95:d0:01:54
 idrac:
-  - name:
-    ip:
-  - name:
-    ip:
-  - name:
-    ip:
-  - name:
-    ip:
+  - name: master-0
+    ip: '{{ ip_space }}.5'
+  - name: master-1
+    ip: '{{ ip_space }}.6'
+  - name: master-2
+    ip: '{{ ip_space }}.7'
+  - name: worker-0
+    ip: '{{ ip_space }}.8'
 
-## Operators To be mirrored, based on index they are in
-disconnected_operators:
-  - redhat-operator-index:
-    - name:
-    - name:
-  - redhat-marketplace-index:
-  - community-operator-index:
-  - certified-operator-index:
+bond_name: bond0
+bond_mode: 802.3ad
+bond_interfaces:
+  - name: ens0f
+  - name: ens1f
+  - name: ens2f
+  - name: ens3f
 
-## additionalImages for oc-mirror to pull. Include version
-additionalImages:
-  - name:
-  - name:
-  - name:
-
-install_operators:
-  - name:
-    namespace:
-    source_index:
-  - name:
-    namespace:
-    source_index:
-
-quay_images:
-- name:
-- name:
-- name:
-- name:
-- name:
-- name:
-
+vlans:
+  - id: 123.4
+  - id: 123.5

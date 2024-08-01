@@ -6,6 +6,8 @@ temp/
 
 # Inventories
 inventories/host_vars/**
+inventories/**
+
 
 # Ansible Vaults
 vault.yml

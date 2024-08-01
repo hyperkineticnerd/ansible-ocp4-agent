@@ -70,3 +70,4 @@
 #    - "{{ quay_images }}"
 
 ### Get a way to pull RHCOS iso
+# openshift-install coreos print-stream-json

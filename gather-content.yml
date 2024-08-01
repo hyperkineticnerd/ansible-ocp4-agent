@@ -3,4 +3,4 @@
   gather_facts: false
   roles:
     - content_generation
-#    - disconnected_images
+    - disconnected_images

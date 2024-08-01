@@ -2,7 +2,7 @@ apiVersion: v1alpha1
 kind: AgentConfig
 metadata:
   name: {{ cluster_name }}
-rendezvousIP: {{ nodes[0].ip }}
+rendezvousIP: {{ ip_space }}.{{ nodes[0].ip }}
 hosts:
 {% for node in nodes %}
   - hostname: {{ node.name }}
@@ -19,8 +19,8 @@ hosts:
           ipv4:
             enabled: true
             address: 
-              - ip: {{ node.ip }}
-                prefix-length: 23
+              - ip: {{ ip_space }}.{{ node.ip }}
+                prefix-length: 16
             dhcp: false
       dns-resolver:
         config:
@@ -31,5 +31,5 @@ hosts:
           - destination: 0.0.0.0/0
             next-hop-address: {{ gateway_ip }}
             next-hop-interface: {{ openshift_interface }}
-            table-id: {{ table_id }}
+            table-id: {{ table_id }}   
 {% endfor %}

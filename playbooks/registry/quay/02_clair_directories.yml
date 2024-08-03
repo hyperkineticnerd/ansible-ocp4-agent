@@ -1,0 +1,14 @@
+---
+- name: Create Red Hat Clair Directories
+  hosts: quay-host
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Create Clair Configuration Directory
+      # when:
+      #   - ansible_distribution == 'RedHat'
+      ansible.builtin.file:
+        state: directory
+        path: "{{ clair_config_path }}"
+        mode: '0755'

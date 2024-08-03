@@ -5,20 +5,6 @@
   become: true
 
   tasks:
-    - name: Create Clair Configuration Directory
-      # when:
-      #   - ansible_distribution == 'RedHat'
-      ansible.builtin.file:
-        state: directory
-        path: "{{ clair_config_path }}"
-        mode: '0755'
-
-    - name: Write Clair Config.yaml
-      ansible.builtin.template:
-        src: clair.yaml
-        dest: "{{ clair_config_path }}/config.yaml"
-        mode: '0644'
-
     - name: Start Clair Server
       containers.podman.podman_container:
         state: started

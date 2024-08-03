@@ -5,21 +5,18 @@
   become: true
 
   tasks:
-    - name: Write Quay Config.yaml
-      ansible.builtin.template:
-        src: quay.yaml
-        dest: "{{ quay_config_path }}/config.yaml"
-        mode: '0644'
-
     - name: Start Quay Server
       containers.podman.podman_container:
         state: started
         name: quay
         image: registry.redhat.io/quay/quay-rhel8:v3.11.0
         hostname: "{{ quay_hostname | default(omit) }}"
+        network: "{{ quay_container_network | default(omit) }}"
+        ip: "{{ quay_ip | default('0.0.0.0') }}"
+        restart_policy: "always"
         publish:
-          - "{{ quay_ip | default('0.0.0.0') }}:80:8080"
-          - "{{ quay_ip | default('0.0.0.0') }}:443:8443"
+          - "80:8080"
+          - "443:8443"
         volume:
           - "{{ quay_config_path }}:/conf/stack:Z"
           - "{{ quay_storage_path }}:/datastorage:Z"

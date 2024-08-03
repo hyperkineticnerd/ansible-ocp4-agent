@@ -15,3 +15,9 @@
         command:
           - config
           - secret
+
+    - name: Write Quay Config.yaml
+      ansible.builtin.template:
+        src: quay.yaml
+        dest: "{{ quay_config_path }}/config.yaml"
+        mode: '0644'

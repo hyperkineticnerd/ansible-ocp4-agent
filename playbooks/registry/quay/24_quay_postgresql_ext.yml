@@ -1,0 +1,16 @@
+---
+- name: Configure PostgreSQL for Red Hat Quay
+  hosts: quay-host
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Install 'pg_trgm'
+      delegate_to: localhost
+      community.postgresql.postgresql_ext:
+        name: pg_trgm
+        db: "{{ quay_postgresql_database }}"
+        login_host: "{{ quay_postgresql_hostname }}"
+        login_port: 5432
+        login_user: "{{ quay_postgresql_username }}"
+        login_password: "{{ quay_postgresql_password }}"

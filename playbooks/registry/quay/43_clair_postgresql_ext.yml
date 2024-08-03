@@ -1,0 +1,16 @@
+---
+- name: Configure PostgreSQL for Red Hat Clair
+  hosts: quay-host
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Install 'uuid-ossp' Extension
+      delegate_to: localhost
+      community.postgresql.postgresql_ext:
+        name: uuid-ossp
+        db: "{{ clair_postgresql_database }}"
+        login_host: "{{ clair_postgresql_hostname }}"
+        login_port: 5433
+        login_user: "{{ clair_postgresql_username }}"
+        login_password: "{{ clair_postgresql_password }}"

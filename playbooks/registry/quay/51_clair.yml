@@ -25,11 +25,13 @@
         name: clair
         image: registry.redhat.io/quay/clair-rhel8:v3.11.0
         hostname: "{{ clair_hostname | default(omit) }}"
+        network: "{{ clair_container_network | default(omit) }}"
+        ip: "{{ clair_ip | default('0.0.0.0') }}"
         env:
           CLAIR_CONF: /clair/config.yaml
           CLAIR_MODE: combo
         publish:
-          - "{{ clair_ip | default('0.0.0.0') }}:8081:8081"
-          - "{{ clair_ip | default('0.0.0.0') }}:8088:8088"
+          - "8081:8081"
+          - "8088:8088"
         volume:
           - "{{ clair_config_path }}:/clair:Z"

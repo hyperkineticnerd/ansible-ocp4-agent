@@ -11,7 +11,10 @@
         name: quay-redis
         image: registry.redhat.io/rhel8/redis-6:1-110
         hostname: "{{ quay_redis_hostname | default(omit) }}"
+        network: "{{ quay_container_network | default(omit) }}"
+        ip: "{{ quay_redis_ip | default('0.0.0.0') }}"
+        restart_policy: "always"
         env:
           REDIS_PASSWORD: "{{ quay_redis_password }}"
-        publish:
-          - "{{ quay_redis_ip | default('0.0.0.0') }}:6379:6379"
+        # publish:
+        #   - "6379:6379"

@@ -4,9 +4,9 @@
 - name: Install NMState Operator
   ansible.builtin.import_playbook: openshift/operator/nmstate.yml
 - name: Install node networks
-  ansible.builtin.import_playbook: openshift/networks/node.yml
+  ansible.builtin.import_playbook: openshift/networks/node/config.yml
 - name: Install pod networks
-  ansible.builtin.import_playbook: openshift/networks/pod.yml
+  ansible.builtin.import_playbook: openshift/networks/pod/config.yml
 - name: Install Trident CLI
   ansible.builtin.import_playbook: openshift/storage/trident/cli.yml
 - name: Deploy Trident

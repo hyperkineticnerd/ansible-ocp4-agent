@@ -27,6 +27,6 @@ fips: {{ cluster_fips_flag }}
 pullSecret: {{ cluster_pull_secret | quote }}
 sshKey: {{ cluster_ssh_key | quote }}
 additionalTrustBundle: |
-  {{ cluster_additional_bundle | index(width=2) }}
+  {{ cluster_additional_bundle | indent(width=2) }}
 imageDigestSources:
   {{ cluster_imagecontentsources }}

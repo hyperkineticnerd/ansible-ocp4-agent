@@ -4,4 +4,5 @@ metadata:
   name: {{ cluster_name }}
 rendezvousIP: {{ cluster_bootstrap_ip }}
 hosts: 
-{{ cluster_hosts | to_nice_yaml }}
+{{ hosts_controlplane | to_nice_yaml }}
+{{ hosts_worker | to_nice_yaml | default(omit) }}

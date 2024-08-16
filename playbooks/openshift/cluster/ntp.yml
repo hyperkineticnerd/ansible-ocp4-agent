@@ -1,0 +1,19 @@
+---
+- name: Configure NTP for the OpenShift cluster
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Generate NTP butane
+      hyperkineticnerd.openshift.butane:
+        src: "templates/ntp-workers.bu.j2"
+      register: ansible_butane_ret
+
+    - name: Debug
+      ansible.builtin.debug:
+        var: ansible_butane_ret.stdout
+
+    # - name: Apply NTP Ignition
+    #   kubernetes.core.k8s:
+    #     state: present
+    #     definition: "{{ ansible_butane_ret.stdout }}"

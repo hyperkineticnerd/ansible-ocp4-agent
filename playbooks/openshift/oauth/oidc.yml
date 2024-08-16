@@ -1,0 +1,66 @@
+---
+- name: Patch OAuth
+  hosts: all
+  connection: local
+  vars:
+    keycloak_url: https://keycloak.example.com:8443/realms/openshift
+    keycloak_client_id: "{{ cluster_name }}"
+    keycloak_client_secret: "{{ cluster_oidc_secret }}"
+    keycloak_ca_pem: ca.cert
+    callback_uri: /oauth2callback/keycloak
+    callback_root: https://oauth-openshift.apps.ocp4.example.com
+  tasks:
+    - name: Inject Client Secret
+      kubernetes.core.k8s:
+        state: present
+        api_version: v1
+        kind: Secret
+        name: oidc-client-secret-keycloak
+        namespace: openshift-config
+        definition:
+          data:
+            clientSecret: "{{ keycloak_client_secret | ansible.builtin.b64encode }}"
+
+    - name: Inject OIDC CA
+      kubernetes.core.k8s:
+        state: present
+        api_version: v1
+        kind: ConfigMap
+        name: cm-keycloak-pem
+        namespace: openshift-config
+        definition:
+          data:
+            ca.crt: |
+              {{ lookup('file', keycloak_ca_pem) }}
+
+    - name: Patch OAuth Object
+      kubernetes.core.k8s:
+        state: patched
+        api_version: config.openshift.io/v1
+        kind: OAuth
+        name: cluster
+        definition:
+          spec:
+            identityProviders:
+              - name: keycloak
+                type: OpenID
+                mappingMethod: claim
+                openID:
+                  issuer: "{{ keycloak_url }}"
+                  clientID: "{{ keycloak_client_id }}"
+                  clientSecret:
+                    name: oidc-client-secret-keycloak
+                  ca:
+                    name: cm-keycloak-pem
+                  claims:
+                    preferredUsername:
+                      - preferred_username
+                    name:
+                      - name
+                    email:
+                      - email
+                    groups:
+                      - groups
+                  extraScopes:
+                    - email
+                    - profile

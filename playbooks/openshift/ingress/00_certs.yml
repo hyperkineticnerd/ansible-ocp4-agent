@@ -1,0 +1,35 @@
+---
+- name: Inject CAs, Certs, and Keys
+  hosts: all
+  connection: local
+  vars:
+    root_ca_chain: chain.pem
+    ingress_cert: apps.pem
+    ingress_key: apps.key
+  tasks:
+    - name: Inject Root CA
+      kubernetes.core.k8s:
+        state: present
+        api_version: v1
+        kind: ConfigMap
+        name: wildcard-root-ca
+        namespace: openshift-config
+        definition:
+          data:
+            ca-bundle.crt: |
+              {{ lookup('file', root_ca_chain) }}
+
+    - name: Inject Ingress Cert & Key
+      kubernetes.core.k8s:
+        state: present
+        api_version: v1
+        kind: Secret
+        name: apps-wildcard-pem
+        namespace: openshift-ingress
+        definition:
+          data:
+            tls.crt: |
+              {{ lookup('file', ingress_cert) }}
+              {{ lookup('file', root_ca_chain) }}
+            tls.key: |
+              {{ lookup('file', ingress_key) }}

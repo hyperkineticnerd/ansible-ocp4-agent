@@ -1,0 +1,27 @@
+---
+- name: Patch Ingress
+  hosts: all
+  connection: local
+  tasks:
+    - name: Patch Proxy
+      kubernetes.core.k8s:
+        state: patched
+        api_version: config.openshift.io/v1
+        kind: Proxy
+        name: cluster
+        definition:
+          spec:
+            trustedCA:
+              name: wildcard-root-ca
+
+    - name: Patch IngressController
+      kubernetes.core.k8s:
+        state: patched
+        api_version: operator.openshift.io/v1
+        kind: IngressController
+        name: default
+        namespace: openshift-ingress-operator
+        definition:
+          spec:
+            defaultCertificate:
+              name: apps-wildcard-pem

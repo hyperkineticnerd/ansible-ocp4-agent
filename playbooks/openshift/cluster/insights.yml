@@ -1,0 +1,31 @@
+---
+- name: Configure Red Hat Insights
+  hosts: localhost
+  become: false
+  # module_defaults:
+  #   kubernetes.core.k8s:
+  #     kubeconfig: $HOME/.kube/config
+  gather_facts: false
+  tasks:
+    - name: Disabling Insights Operator alerts 
+      kubernetes.core.k8s:
+        state: patched
+        api_version: v1
+        kind: Secret
+        name: support
+        namespace: openshift-config
+        definition:
+          spec:
+            disableInsightsAlerts: "True"
+
+    # - name: Disable gather
+    #   kubernetes.core.k8s:
+    #     state: patched
+    #     api_version: config.openshift.io/v1alpha1
+    #     kind: InsightsDataGather
+    #     name: cluster
+    #     definition:
+    #       spec: 
+    #         gatherConfig:
+    #           disabledGatherers:
+    #             - all
